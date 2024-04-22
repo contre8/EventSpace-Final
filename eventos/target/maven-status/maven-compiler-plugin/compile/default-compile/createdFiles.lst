@@ -1,6 +1,7 @@
 com\mycompany\entities\Propietario_.class
 com\mycompany\rest\ClienteFacadeREST.class
 com\mycompany\rest\PropietarioFacadeREST.class
+com\mycompany\login\Login.class
 com\mycompany\rest\AdministradorFacadeREST.class
 com\mycompany\entities\Espacio_.class
 com\mycompany\entities\ReservarEspacioPK.class

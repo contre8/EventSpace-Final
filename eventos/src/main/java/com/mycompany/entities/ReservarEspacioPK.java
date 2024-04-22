@@ -68,9 +68,9 @@ public class ReservarEspacioPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += id;
         hash += (cliente != null ? cliente.hashCode() : 0);
-        hash += (int) espacio;
+        hash += espacio;
         return hash;
     }
 
