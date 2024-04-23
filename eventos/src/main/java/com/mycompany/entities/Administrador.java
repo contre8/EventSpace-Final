@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a"),
     @NamedQuery(name = "Administrador.findByLogin", query = "SELECT a FROM Administrador a WHERE a.login = :login"),
-    @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = crypt(:password, a.password)")})
+    @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")})
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;

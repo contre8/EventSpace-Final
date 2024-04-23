@@ -30,7 +30,7 @@ import javax.ws.rs.core.MediaType;
 @Path("com.mycompany.entities.espacio")
 public class EspacioFacadeREST extends AbstractFacade<Espacio> {
 
-    @PersistenceContext(unitName = "com.mycompany_eventos_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "com.mycompany_final_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     public EspacioFacadeREST() {

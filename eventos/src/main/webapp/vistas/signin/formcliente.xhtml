@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:outputScript name="../../resources/bootstrap/js/bootstrap.js" />
+    <h:outputScript name="../../resources/bootstrap/js/bootstrap.min.js"/>
+    <h:outputStylesheet name="../../resources/bootstrap/css/bootstrap.css"/>
+
+    <link href="${facesContext.externalContext.requestContextPath}/resources/bootstrap/css/cssLayout.css"
+          rel="stylesheet" type="text/css" />
+
+    <h:outputScript library="js" name="../../resources/bootstrap/js/jquery.min.js" />
+    <h:outputScript library="js" name="../../resources/bootstrap/js/validacion.js" />
+
+
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h2><h:outputText value="Registro de Cliente"/></h2>
+                <div class="container" style="padding-top: 20px;">
+                    <h:form prependId="false">
+                        <h:panelGrid columns="3" id="grid">
+                            <p:outputLabel for="nombre" value="Nombre:"/>
+                            <p:inputText id="nombre"/>
+                            <p:message for="nombre"/>
+                            
+                            <p:outputLabel for="apellido" value="Apellidos:"/>
+                            <p:inputText id="apellido"/>
+                            <p:message for="apellido"/>
+
+                            <p:outputLabel for="email" value="Email:"/>
+                            <p:inputText id="email"/>
+                            <p:message for="email"/>
+
+                            <p:outputLabel for="password" value="Contraseña:"/>
+                            <p:password id="password"/>
+                            <p:message for="password"/>
+
+                            <p:outputLabel for="dni" value="DNI:"/>
+                            <p:inputText id="dni"/>
+                            <p:message for="dni"/>
+
+                            <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
+                            <input type="date" id="fechaNacimiento" class="form-control" />
+                            <h:outputLabel value=" " />
+
+                            <p:outputLabel for="telefono" value="Teléfono:"/>
+                            <p:inputNumber id="telefono" maxValue="999999999" minValue="100000000"/>
+                            <p:message for="telefono"/>
+
+                            <p:outputLabel for="tarjeta" value="Tarjeta de credito"/>
+                            <p:inputMask id="tarjeta" value="#{booking.tarjeta}" mask="9999-9999-9999-9999" required="true"/>
+                            <p:message for="tarjeta"/>
+                            <p:outputLabel for="fecha" value="Fecha de expiracion"/>
+                            <p:datePicker id="fecha" view="month" value="#{booking.fecha}" pattern="MM/yyyy" locale="es"
+                                          yearNavigator="true" yearRange="2020:2030" />
+                            <p:message for="fecha"/>
+                        </h:panelGrid>
+                        <p/>
+                        <p:commandButton id="next" value="Confirmar" action="print" update="grid"/>
+                        <p:commandButton id="back" value="Atrás" action="confirm" icon="ui-icon-arrowrefresh-1-w"
+                                         immediate="true"/>
+                        <p/>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top: 5px;">
+                        <h:commandButton value="Registrarse" class="btn btn-primary btn-block" />
+                            <h:commandButton value="Volver" onclick="window.history.back()" class="btn btn-secondary btn-block" />
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

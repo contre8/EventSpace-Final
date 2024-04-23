@@ -12,11 +12,15 @@ import com.mycompany.rest.AdministradorFacadeREST;
 import com.mycompany.rest.ClienteFacadeREST;
 import com.mycompany.rest.PropietarioFacadeREST;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
 
 /**
  *
@@ -37,36 +41,91 @@ public class Login implements Serializable {
 
     private String username;
     private String password;
+    private boolean logged = false;
+    private String rol;
 
-    public String login() {
+    public boolean login() {
         FacesContext context = FacesContext.getCurrentInstance();
         
         // Verificar si el usuario es administrador
+        Propietario prop = propFacade.find(username);
         Administrador admin = adminFacade.find(username);
-        System.out.println(adminFacade.find(username));
-        if (admin != null) {
+        Cliente cli = cliFacade.find(username);
+        if (admin != null && admin.getPassword().equals(encryptPassword(password))) {
             // Iniciar sesión como administrador
-            return "http://localhost:8080/eventos/faces/index.xhtml?faces-redirect=true";
+            logged=true;
+            rol="admin";
+            return true;
         }
         
         // Verificar si el usuario es propietario
-        Propietario prop = propFacade.find(username);
-        if (prop != null && prop.getPassword().equals(password)) {
+        
+        else if (prop != null && encryptPassword(password).equals(prop.getPassword())) {
             // Iniciar sesión como propietario
-            return "http://localhost:8080/eventos/faces/index.xhtml?faces-redirect=true";
+            logged=true;
+            rol="prop";
+            return true;
         }
         
         // Verificar si el usuario es cliente
-        Cliente cli = cliFacade.find(username);
-        if (cli != null && cli.getPassword().equals(password)) {
+        
+        else if (cli != null && encryptPassword(password).equals(cli.getPassword())) {
             // Iniciar sesión como cliente
-            return "http://localhost:8080/eventos/faces/index.xhtml?faces-redirect=true";
+            logged=true;
+            rol="cli";
+            return true;
         }
 
         // Si no se encuentra ningún usuario con las credenciales proporcionadas
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Credenciales inválidas"));
-        return null;
+        return false;
     }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+    
+    public static String encryptPassword(String input) {
+        try {
+            // Obtener una instancia de MessageDigest para MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // Convertir la entrada a bytes usando UTF-8
+            byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
+
+            // Calcular el hash MD5
+            byte[] hashBytes = md.digest(inputBytes);
+
+            // Convertir el hash a una representación hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = Integer.toHexString(0xFF & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    
 
     public AdministradorFacadeREST getAdminFacade() {
         return adminFacade;

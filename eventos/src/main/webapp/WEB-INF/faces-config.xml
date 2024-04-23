@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+              version="2.2">
+    <navigation-rule>
+        <from-view-id>/vistas/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{login.login}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml?login=admin</to-view-id>
+            <redirect/>
+            <if>#{login.rol eq 'admin'}</if>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{login.login}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml?login=prop</to-view-id>
+            <redirect/>
+            <if>#{login.rol eq 'prop'}</if>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{login.login}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml?login=cli</to-view-id>
+            <redirect/>
+            <if>#{login.rol eq 'cli'}</if>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
