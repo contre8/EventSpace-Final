@@ -17,6 +17,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -51,12 +52,12 @@ public class PropClientBean {
     PropBackingBean bean;
 
     public Propietario getProp() {
-        Propietario m = target
+        Propietario p = target
                 .path("{email}")
                 .resolveTemplate("email", bean.getEmail())
                 .request()
                 .get(Propietario.class);
-        return m;
+        return p;
     }
 
     public void deleteProp() {
@@ -65,7 +66,7 @@ public class PropClientBean {
                 .request()
                 .delete();
     }
-    
+
     public void addProp() {
         Propietario prop = new Propietario();
         prop.setNombreespacio(bean.getNombreEspacio());
@@ -78,5 +79,38 @@ public class PropClientBean {
         target.register(PropWriter.class)
                 .request()
                 .post(Entity.entity(prop, MediaType.APPLICATION_JSON));
+    }
+
+    public void autorizarProp() {
+        Propietario prop = getProp();
+        prop.setAutorizado(true);
+
+        Response response = null;
+        try {
+            response = target
+                    .path("{email}")
+                    .resolveTemplate("email", prop.getEmail())
+                    .request()
+                    .put(Entity.entity(prop, MediaType.APPLICATION_JSON));
+
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                // La actualización fue exitosa
+                System.out.println("Propietario autorizado exitosamente.");
+                // Aquí podrías mostrar un mensaje de éxito en la interfaz de usuario
+            } else {
+                // Hubo un error en la actualización
+                System.err.println("Error al autorizar el propietario. Código de estado: " + response.getStatus());
+                // Aquí podrías mostrar un mensaje de error en la interfaz de usuario
+            }
+        } catch (Exception e) {
+            // Manejar cualquier excepción que pueda ocurrir
+            e.printStackTrace();
+            System.err.println("Error al autorizar el propietario: " + e.getMessage());
+            // Aquí podrías mostrar un mensaje de error en la interfaz de usuario
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
     }
 }

@@ -8,9 +8,11 @@ package com.mycompany.login;
 import com.mycompany.entities.Administrador;
 import com.mycompany.entities.Cliente;
 import com.mycompany.entities.Propietario;
+import com.mycompany.prop.PropBackingBean;
 import com.mycompany.rest.AdministradorFacadeREST;
 import com.mycompany.rest.ClienteFacadeREST;
 import com.mycompany.rest.PropietarioFacadeREST;
+import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -18,9 +20,10 @@ import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
-
 
 /**
  *
@@ -32,10 +35,10 @@ public class Login implements Serializable {
 
     @EJB
     private AdministradorFacadeREST adminFacade;
-    
+
     @EJB
     private PropietarioFacadeREST propFacade;
-    
+
     @EJB
     private ClienteFacadeREST cliFacade;
 
@@ -43,42 +46,54 @@ public class Login implements Serializable {
     private String password;
     private boolean logged = false;
     private String rol;
+    
+    @Inject
+    PropBackingBean bean;
 
     public boolean login() {
         FacesContext context = FacesContext.getCurrentInstance();
-        
+
         // Verificar si el usuario es administrador
         Propietario prop = propFacade.find(username);
         Administrador admin = adminFacade.find(username);
         Cliente cli = cliFacade.find(username);
         if (admin != null && admin.getPassword().equals(encryptPassword(password))) {
             // Iniciar sesión como administrador
-            logged=true;
-            rol="admin";
+            logged = true;
+            rol = "admin";
             return true;
-        }
-        
-        // Verificar si el usuario es propietario
-        
+        } // Verificar si el usuario es propietario
         else if (prop != null && encryptPassword(password).equals(prop.getPassword())) {
             // Iniciar sesión como propietario
-            logged=true;
-            rol="prop";
+            logged = true;
+            rol = "prop";
+
+            bean.setEmail(prop.getEmail());
+            bean.setNombreEspacio(prop.getNombreespacio());
+            bean.setPassword(prop.getPassword()); // Se debe evitar almacenar la contraseña en texto plano en el bean por motivos de seguridad
+            bean.setCif(prop.getCif());
+            bean.setDomicilioSocial(prop.getDomiciliosocial());
+            bean.setTelefono(prop.getTelefono());
+            bean.setAutorizado(prop.getAutorizado());
+
             return true;
-        }
-        
-        // Verificar si el usuario es cliente
-        
+        } // Verificar si el usuario es cliente
         else if (cli != null && encryptPassword(password).equals(cli.getPassword())) {
             // Iniciar sesión como cliente
-            logged=true;
-            rol="cli";
+            logged = true;
+            rol = "cli";
             return true;
         }
 
         // Si no se encuentra ningún usuario con las credenciales proporcionadas
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Credenciales inválidas"));
         return false;
+    }
+
+    public boolean logout() {
+        logged = false;
+        rol = "";
+        return true;
     }
 
     public String getRol() {
@@ -88,7 +103,7 @@ public class Login implements Serializable {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    
+
     public boolean isLogged() {
         return logged;
     }
@@ -96,7 +111,7 @@ public class Login implements Serializable {
     public void setLogged(boolean logged) {
         this.logged = logged;
     }
-    
+
     public static String encryptPassword(String input) {
         try {
             // Obtener una instancia de MessageDigest para MD5
@@ -124,8 +139,6 @@ public class Login implements Serializable {
             return null;
         }
     }
-    
-    
 
     public AdministradorFacadeREST getAdminFacade() {
         return adminFacade;
@@ -167,5 +180,4 @@ public class Login implements Serializable {
         this.password = password;
     }
 
-    
 }

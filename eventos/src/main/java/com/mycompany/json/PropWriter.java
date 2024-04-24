@@ -48,6 +48,7 @@ public class PropWriter implements MessageBodyWriter<Propietario> {
                 .write("cif", propietario.getCif())
                 .write("domicilioSocial", propietario.getDomiciliosocial())
                 .write("telefono", propietario.getTelefono())
+                .write("autorizado", propietario.getAutorizado())
                 .writeEnd();
         gen.flush();
     }

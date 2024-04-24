@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <c:if test="#{login.rol eq 'admin'}">
+                    <h2 style="text-decoration: underline">Detalles del Propietario</h2>          
+                    <h:form style="margin-top: 20px; margin-bottom: 20px">
+                        <table>
+                            <tr style="margin-top: 10px;">
+                                <td><h:outputText value="Nombre Espacio:" /></td>
+                                <td><h:inputText value="#{propClientBean.prop.nombreespacio}" disabled="true" /></td>
+                            </tr>
+                            <tr style="margin-top: 10px;">
+                                <td><h:outputText value="Email:" /></td>
+                                <td><h:inputText value="#{propClientBean.prop.email}" disabled="true" /></td>
+                            </tr>
+                            <tr style="margin-top: 10px;">
+                                <td><h:outputText value="CIF:" /></td>
+                                <td><h:inputText value="#{propClientBean.prop.cif}" disabled="true" /></td>
+                            </tr>
+                            <tr style="margin-top: 10px;">
+                                <td><h:outputText value="Domicilio Social:" /></td>
+                                <td><h:inputText value="#{propClientBean.prop.domiciliosocial}" disabled="true" /></td>
+                            </tr>
+                            <tr style="margin-top: 10px;">
+                                <td><h:outputText value="Teléfono:" /></td>
+                                <td><h:inputText value="#{propClientBean.prop.telefono}" disabled="true" /></td>
+                            </tr>
+                            <tr style="margin-top: 10px;margin-bottom:">
+                                <td><h:outputText value="Autorizado:" /></td>
+                                <td><h:selectBooleanCheckbox value="#{propClientBean.prop.autorizado}" disabled="#{not propBackingBean.autorizado}" /></td>
+                            </tr>
+                        </table>
+                        <div style="margin-top: 20px">
+                            <c:if test="#{!propClientBean.prop.autorizado}">
+                                <h:commandButton class="btn btn-success" style="margin-right: 20px" value="Autorizar" action="listaPropietarios?autorizado=true" actionListener="#{propClientBean.autorizarProp()}" rendered="#{not m.autorizado}"/>
+                            </c:if>
+                            <h:commandButton class="btn btn-danger" value="Eliminar" action="listaPropietarios?eliminado=true" actionListener="#{propClientBean.deleteProp()}"/>
+                        </div>
+                        <div align="center">
+                            <h:commandButton class="btn btn-primary lg-2 center-block" style="margin-top: 10px; width: 200px;" value="Volver" action="listaPropietarios" />
+                        </div>
+
+
+                    </h:form>
+
+                </c:if>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

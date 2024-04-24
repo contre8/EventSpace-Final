@@ -21,14 +21,14 @@
                 <div class="container">
                     <h2 class="text-center">Inicio de Sesión</h2>
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-4">
+                        <div class="col-md-4 col-md-offset-4" style="margin-top: 50px">
                             <h:form>
                                 <h:form>
                                     <h:panelGrid columns="2" styleClass="form-group">
-                                        <h:outputLabel for="name" value="Nombre de Usuario:"/>
+                                        <h:outputLabel for="name" value="Email:"/>
                                         <h:inputText id="name" value="#{login.username}" required="true" />
-                                        <h:outputLabel for="password" value="Contraseña:"/>
-                                        <h:inputSecret id="password" value="#{login.password}" required="true" />
+                                        <h:outputLabel for="password" value="Contraseña:" style="margin-top: 20px; margin-right: 25px"/>
+                                        <h:inputSecret id="password" value="#{login.password}" required="true" style="margin-top: 20px"/>
                                     </h:panelGrid>
                                     <h:commandButton value="Iniciar Sesión" action="#{login.login}" styleClass="btn btn-primary btn-block"/>
                                 </h:form>

@@ -62,7 +62,7 @@ public class Cliente implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 64)
+    
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
@@ -73,8 +73,8 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechanacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechanacimiento;
+    @Size(min = 1, max = 10)
+    private String fechanacimiento;
     @Basic(optional = false)
     @NotNull
     @Column(name = "telefono")
@@ -89,7 +89,7 @@ public class Cliente implements Serializable {
         this.dni = dni;
     }
 
-    public Cliente(String dni, String nombre, String apellidos, String email, String password, Date fechanacimiento, int telefono) {
+    public Cliente(String dni, String nombre, String apellidos, String email, String password, String fechanacimiento, int telefono) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -139,11 +139,11 @@ public class Cliente implements Serializable {
         this.dni = dni;
     }
 
-    public Date getFechanacimiento() {
+    public String getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
+    public void setFechanacimiento(String fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
 

@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -38,12 +39,33 @@
                             <a class="navbar-brand" href="#">EventSpace</a>
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="http://localhost:8080/final/faces/index.xhtml">Home</a></li>
-                                <li ><a href="#about">About</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                                <c:if test="#{login.rol eq 'admin'}">
+                                    <li><a href="http://localhost:8080/final/faces/vistas/administrador/listaPropietarios.xhtml">Propietarios</a></li>
+                                </c:if>                                
+                                <c:if test="#{login.rol eq 'cli'}">
+                                    <li><a href="#espacio">Reservar Espacio</a></li>
+                                </c:if>
+                                <c:if test="#{login.rol eq 'prop'}">
+                                    <li><a href="#espacio">Añadir Espacio</a></li>
+                                </c:if>
+                                <c:if test="#{login.rol eq 'prop' or login.rol eq 'cli'}">
+                                    <li><a href="#chat">Chat</a></li>
+                                </c:if>
                             </ul>
                             <ul class="nav nav-pills navbar-right center_content text-bg-dark navbar-collapse" style="background-color: transparent; " >
-                                <li style="margin-right: 10px;"><a class="btn btn-success" href="http://localhost:8080/final/faces/vistas/login.xhtml">Login</a></li>
-                                <li ><a class="btn-warning" href="http://localhost:8080/final/faces/vistas/signin/signin.xhtml" style="color: white">Sign-in</a></li>
+                                <c:if test="#{!login.logged}">
+                                    <li style="margin-right: 10px;"><a class="btn btn-success" href="http://localhost:8080/final/faces/vistas/login.xhtml">LogIn</a></li>
+                                    <li ><a class="btn-warning" href="http://localhost:8080/final/faces/vistas/signin/signin.xhtml" style="color: white">Sign-in</a></li>
+                                </c:if>
+                                <h:panelGroup rendered="#{login.logged}">
+                                    <li style="margin-left: 10px; margin-top: 3px">
+                                        <h:form>
+                                            <h:commandButton actionListener="#{login.logout}" action="http://localhost:8080/final/faces/vistas/login.xhtml" styleClass="btn btn-danger" value="LogOut" />
+                                        </h:form>
+                                    </li>
+                                </h:panelGroup>
+
+                                <li style="margin-right: 10px;"><a class="btn-primary" href="http://localhost:8080/final/faces/vistas/login.xhtml">#{login.username} #{login.password}</a></li>
                             </ul>
                         </div>
                         <!--/.nav-collapse -->
@@ -51,6 +73,12 @@
                 </nav>
             </header>
         </div>
+
+        <c:if test="#{login.rol eq 'prop'}">
+        <div class="alert alert-danger" role="alert" style="display: #{not propClientBean.prop.autorizado ? 'block' : 'none'}">
+            El estado de su cuenta es temporal<br>Pendiente de Autorización</br>
+        </div>
+        </c:if>
 
         <div id="content" class="p-3 text-bg-dark" align="center">
             <ui:insert name="content">Content</ui:insert>

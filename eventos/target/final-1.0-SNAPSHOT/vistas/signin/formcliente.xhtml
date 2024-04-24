@@ -27,49 +27,40 @@
                     <h:form prependId="false">
                         <h:panelGrid columns="3" id="grid">
                             <p:outputLabel for="nombre" value="Nombre:"/>
-                            <p:inputText id="nombre"/>
+                            <p:inputText id="nombre" value="#{cliBackingBean.nombre}"/>
                             <p:message for="nombre"/>
-                            
-                            <p:outputLabel for="apellido" value="Apellidos:"/>
-                            <p:inputText id="apellido"/>
+
+                            <p:outputLabel for="apellido" value="Apellidos:" style="margin-top: 20px"/>
+                            <p:inputText id="apellido" value="#{cliBackingBean.apellido}"/>
                             <p:message for="apellido"/>
 
-                            <p:outputLabel for="email" value="Email:"/>
-                            <p:inputText id="email"/>
+                            <p:outputLabel for="email" value="Email:" style="margin-top: 20px"/>
+                            <p:inputText id="email" value="#{cliBackingBean.email}"/>
                             <p:message for="email"/>
 
-                            <p:outputLabel for="password" value="Contraseña:"/>
-                            <p:password id="password"/>
+                            <p:outputLabel for="password" value="Contraseña:" style="margin-top: 20px"/>
+                            <p:password id="password" value="#{cliBackingBean.password}"/>
                             <p:message for="password"/>
 
-                            <p:outputLabel for="dni" value="DNI:"/>
-                            <p:inputText id="dni"/>
+                            <p:outputLabel for="dni" value="DNI:" style="margin-top: 20px"/>
+                            <p:inputText id="dni" value="#{cliBackingBean.dni}"/>
                             <p:message for="dni"/>
-
-                            <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
-                            <input type="date" id="fechaNacimiento" class="form-control" />
-                            <h:outputLabel value=" " />
-
-                            <p:outputLabel for="telefono" value="Teléfono:"/>
-                            <p:inputNumber id="telefono" maxValue="999999999" minValue="100000000"/>
+                            
+                            <h:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" style="margin-top: 20px"/>
+                            <p:inputText id="fechaNacimiento" value="#{cliBackingBean.fechanacimiento}"/>
+                            <p:message for="fechaNacimiento"/>
+                            
+                            <p:outputLabel for="telefono" value="Teléfono:" style="margin-top: 20px"/>
+                            <p:inputText id="telefono"  value="#{cliBackingBean.telefono}"/>
                             <p:message for="telefono"/>
 
-                            <p:outputLabel for="tarjeta" value="Tarjeta de credito"/>
-                            <p:inputMask id="tarjeta" value="#{booking.tarjeta}" mask="9999-9999-9999-9999" required="true"/>
-                            <p:message for="tarjeta"/>
-                            <p:outputLabel for="fecha" value="Fecha de expiracion"/>
-                            <p:datePicker id="fecha" view="month" value="#{booking.fecha}" pattern="MM/yyyy" locale="es"
-                                          yearNavigator="true" yearRange="2020:2030" />
-                            <p:message for="fecha"/>
                         </h:panelGrid>
                         <p/>
-                        <p:commandButton id="next" value="Confirmar" action="print" update="grid"/>
-                        <p:commandButton id="back" value="Atrás" action="confirm" icon="ui-icon-arrowrefresh-1-w"
-                                         immediate="true"/>
+
                         <p/>
-                        <div class="col-md-4 col-md-offset-4" style="margin-top: 5px;">
-                        <h:commandButton value="Registrarse" class="btn btn-primary btn-block" />
-                            <h:commandButton value="Volver" onclick="window.history.back()" class="btn btn-secondary btn-block" />
+                        <div class="col-md-4 col-md-offset-4" style="margin-top: 20px;">
+                            <h:commandButton value="Registrarse" class="btn btn-primary btn-block" actionListener="#{cliClientBean.addCliente()}" action="signin"/>
+                            <h:commandButton value="Volver"  class="btn btn-secondary btn-block" action="signin"/>
                         </div>
                     </h:form>
                 </div>

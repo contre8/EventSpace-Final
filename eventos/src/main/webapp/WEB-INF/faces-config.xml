@@ -26,5 +26,11 @@
             <redirect/>
             <if>#{login.rol eq 'cli'}</if>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{login.logout}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml?logout=true</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

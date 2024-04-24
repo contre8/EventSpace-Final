@@ -1,5 +1,6 @@
 com\mycompany\prop\PropBackingBean.class
 com\mycompany\json\PropReader.class
+com\mycompany\json\CliReader$1.class
 com\mycompany\entities\Propietario_.class
 com\mycompany\rest\ClienteFacadeREST.class
 com\mycompany\login\Login.class
@@ -10,16 +11,20 @@ com\mycompany\entities\ReservarEspacioPK.class
 com\mycompany\rest\ReservarEspacioFacadeREST.class
 com\mycompany\signin\Signin.class
 com\mycompany\entities\Espacio.class
+com\mycompany\cli\CliBackingBean.class
 com\mycompany\entities\Administrador.class
 com\mycompany\rest\ApplicationConfig.class
 com\mycompany\entities\Administrador_.class
+com\mycompany\json\CliWriter.class
 com\mycompany\entities\Propietario.class
 com\mycompany\rest\AbstractFacade.class
 com\mycompany\entities\ReservarEspacio.class
+com\mycompany\cli\CliClientBean.class
 com\mycompany\rest\PropietarioFacadeREST.class
 com\mycompany\rest\AdministradorFacadeREST.class
 com\mycompany\json\PropReader$1.class
 com\mycompany\entities\ReservarEspacio_.class
+com\mycompany\json\CliReader.class
 com\mycompany\rest\EspacioFacadeREST.class
 com\mycompany\entities\Cliente_.class
 com\mycompany\entities\Cliente.class

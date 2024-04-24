@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:outputScript name="../../resources/bootstrap/js/bootstrap.js" />
     <h:outputScript name="../../resources/bootstrap/js/bootstrap.min.js"/>
@@ -24,32 +25,26 @@
                     <div class="col-md-4 col-md-offset-4" style="margin-top: 40px;">
 
                         <h:form>
-                            <div class="form-group">
-                                <h:outputLabel for="nombreEspacio" value="Nombre del Espacio:"/>
-                                <h:inputText value="#{propBackingBean.nombreEspacio}" id="nombreEspacio" class="form-control"  label="Ingrese el nombre del espacio" />
-                            </div>
-                            <div class="form-group">
-                                <h:outputLabel for="email" value="Email:" style="display: inline-block; width: 150px;" />
-                                <h:inputText value="#{propBackingBean.email}" id="email" class="form-control" label="Ingrese su correo electrónico" />
-                            </div>
-                            <div class="form-group">
-                                <h:outputLabel for="password" value="Contraseña:" style="display: inline-block; width: 150px;" />
-                                <h:inputSecret value="#{propBackingBean.password}" id="password" class="form-control" label="Ingrese su contraseña" />
-                            </div>
-                            <div class="form-group">
-                                <h:outputLabel for="cif" value="CIF:" style="display: inline-block; width: 150px;" />
-                                <h:inputText value="#{propBackingBean.cif}" id="cif" class="form-control" label="Ingrese su CIF" />
-                            </div>
-                            <div class="form-group">
-                                <h:outputLabel for="domicilioSocial" value="Domicilio Social:" style="display: inline-block; width: 150px;" />
-                                <h:inputText value="#{propBackingBean.domicilioSocial}" id="domicilioSocial" class="form-control" label="Ingrese su domicilio social" />
-                            </div>
-                            <div class="form-group" style="margin-bottom: 50px;">
-                                <h:outputLabel for="telefono" value="Teléfono:" style="display: inline-block; width: 150px;" />
-                                <h:inputText value="#{propBackingBean.telefono}" id="telefono" class="form-control" label="Ingrese su número de teléfono" />
-                            </div>
-                            <h:commandButton value="Registrarse" class="btn btn-primary btn-block" actionListener="#{propClientBean.addProp()}" action="signin"/>
-                            <h:commandButton value="Volver" onclick="window.history.back()" class="btn btn-secondary btn-block" />
+                            <h:outputLabel for="nombreEspacio" value="Nombre del Espacio:"/>
+                            <p:inputText id="nombreEspacio" value="#{propBackingBean.nombreEspacio}" class="form-control" label="Ingrese el nombre del espacio" />
+                            
+                            <h:outputLabel for="email" value="Email:" style="display: inline-block; width: 150px;" />
+                            <p:inputText id="email" value="#{propBackingBean.email}" class="form-control" label="Ingrese su correo electrónico" />
+
+                            <h:outputLabel for="password" value="Contraseña:" style="display: inline-block; width: 150px;" />
+                            <p:password id="password" value="#{propBackingBean.password}" class="form-control" label="Ingrese su contraseña" />
+
+                            <h:outputLabel for="cif" value="CIF:" style="display: inline-block; width: 150px;" />
+                            <p:inputText id="cif" value="#{propBackingBean.cif}" class="form-control" label="Ingrese su CIF" />
+
+                            <h:outputLabel for="domicilioSocial" value="Domicilio Social:" style="display: inline-block; width: 150px;" />
+                            <p:inputText id="domicilioSocial" value="#{propBackingBean.domicilioSocial}" class="form-control" label="Ingrese su domicilio social" />
+
+                            <h:outputLabel for="telefono" value="Teléfono:" style="display: inline-block; width: 150px;" />
+                            <p:inputText id="telefono" value="#{propBackingBean.telefono}" class="form-control" label="Ingrese su número de teléfono" />
+
+                            <h:commandButton value="Registrarse" styleClass="btn btn-primary btn-block" actionListener="#{propClientBean.addProp()}" action="signin" style="margin-top: 30px"/>
+                            <h:commandButton value="Volver" styleClass="btn btn-secondary btn-block" action="signin"/>
                         </h:form>
                     </div>
 

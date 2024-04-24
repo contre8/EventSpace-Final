@@ -23,7 +23,7 @@ CREATE TABLE cliente (
     Email varchar(256) NOT NULL,
     Password varchar(64) NOT NULL,
     DNI varchar(9) NOT NULL,
-    FechaNacimiento date NOT NULL,
+    FechaNacimiento varchar(10) NOT NULL,
     Telefono int NOT NULL,
     PRIMARY KEY (DNI)
 );

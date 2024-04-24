@@ -5,14 +5,12 @@
  */
 package com.mycompany.prop;
 
-import com.mycompany.entities.Propietario;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -28,6 +26,7 @@ public class PropBackingBean implements Serializable {
     String cif;
     String domicilioSocial;
     int telefono;
+    boolean autorizado;
 
     public static String encryptPassword(String input) {
         try {
@@ -105,4 +104,13 @@ public class PropBackingBean implements Serializable {
         this.telefono = telefono;
     }
 
+    public boolean isAutorizado() {
+        return autorizado;
+    }
+
+    public void setAutorizado(boolean autorizado) {
+        this.autorizado = autorizado;
+    }
+
+    
 }

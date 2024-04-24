@@ -12,15 +12,52 @@
         <ui:composition template="./../../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h:form>
-                    <h:selectOneRadio value="#{propBackingBean.email}"
-                                      layout="pageDirection">
-                        <c:forEach items="#{propClientBean.props}" var="p">
-                            <f:selectItem itemValue="#{p.email}" itemLabel="#{p.email}"/>
-                        </c:forEach>
-                    </h:selectOneRadio>
-                    <p:commandButton value="Detalles" action="movie" />
-                </h:form>
+                <c:if test="#{login.rol eq 'admin'}">
+                    <h2 style="text-decoration: underline">Listado Propietarios</h2>
+
+                    <h:form style="margin-top: 40px;">
+                        <p:selectOneRadio value="#{propBackingBean.email}" layout="pageDirection">
+                            <c:forEach items="#{propClientBean.props}" var="m">                                
+                                <f:selectItem itemValue="#{m.email}" itemLabel="#{m.autorizado} - #{m.email} - #{m.telefono} - #{m.nombreespacio} - #{m.cif} "/>
+                            </c:forEach>
+                        </p:selectOneRadio>
+                        <p:commandButton value="Ver Detalles" action="verPropietario" style="margin-top: 20px;" />
+                    </h:form>
+                                        
+                    <h:form style="margin-top: 40px;">
+                        <table class="table" align="center" style="margin-left: 20px; margin-right: 20px;">
+                            <thead>
+                                <tr>
+                                    <th>Seleccionar</th>
+                                    <th>Email</th> 
+                                    <th>Nombre del Espacio</th>
+                                    <th>Teléfono</th>
+                                    <th>Autorizado</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{propClientBean.props}" var="prop">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="propRadio" value="#{propBackingBean.email}" />
+                                        </td>
+                                        <td>#{prop.email}</td>
+                                        <td>#{prop.nombreespacio}</td>
+                                        <td>#{prop.telefono}</td>
+                                        <td>
+                                            <h:selectBooleanCheckbox class="checkbox-inline" value="#{prop.autorizado}" disabled="true" />
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <h:commandButton value="Ver Detalles" action="verPropietario" />
+                    </h:form>
+
+
+
+                </c:if>
             </ui:define>
 
         </ui:composition>
