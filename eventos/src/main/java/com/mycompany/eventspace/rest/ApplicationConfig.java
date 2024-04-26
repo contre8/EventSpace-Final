@@ -29,6 +29,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.mycompany.eventspace.json.EspacioReader.class);
+        resources.add(com.mycompany.eventspace.json.EspacioWriter.class);
         resources.add(com.mycompany.eventspace.rest.EspacioFacadeREST.class);
         resources.add(com.mycompany.eventspace.rest.ReservarEspacioFacadeREST.class);
         resources.add(com.mycompany.eventspace.rest.UserGroupsFacadeREST.class);

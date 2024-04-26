@@ -18,7 +18,7 @@
                     Nombre: #{reserva.espacio.nombre}<p/>
                     Ciudad: #{reserva.espacio.ciudad}<p/>                    
                     Dirección: #{reserva.espacio.direccion}<p/>
-                    Propietario #{reserva.espacio.propietario}<p/>
+                    Propietario: #{reserva.espacio.propietario.email}<p/>
                     Precio: #{reserva.espacio.precio}€<p/>
                     <p:outputLabel for="fecha" value="Fecha de reserva: "/>
                     <p:datePicker id="fecha" view="date" value="#{reserva.fecha}" locale="es"

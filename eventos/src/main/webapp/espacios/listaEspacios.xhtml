@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -13,18 +14,18 @@
             <ui:define name="content">
                 <f:view>
                     <h:form>
-                        <h1 style="padding: 10px;">Lista Espacios</h1>
-                        <p:dataTable value="#{espacioFacadeREST.findAll()}" var="esp" emptyMessage="No hay datos disponibles">
-                            <p:column headerText="Id">
-                                <h:outputText value="#{esp.id}"/>
-                            </p:column>
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{esp.nombre}"/>
-                            </p:column>
-                            <p:column headerText="Propietario">
-                                <h:outputText value="#{esp.propietario}"/>
-                            </p:column>
-                        </p:dataTable>
+                        <h2 style="padding: 10px;">Lista Espacios</h2>
+                        <h:form>
+                            <h:selectOneRadio value="#{espacioBackingBean.espId}"
+                                              layout="pageDirection">
+                                <c:forEach items="#{espacioJava.espaciosPropietario3}" var="e">
+                                    <f:selectItem itemValue="#{e.id}" itemLabel="#{e.nombre}"/>
+                                </c:forEach>
+                            </h:selectOneRadio>
+                            
+                        </h:form>
+                        <p:commandButton value=" Detalles " action="espacio" />
+                        <p:commandButton value="Añadir Espacio" action="anadir" />
                     </h:form>
                 </f:view>
             </ui:define>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h2><h:outputText value="Información del espacio #{espacioClientBean.espacio.nombre}"/></h2>
+                    <p:panelGrid id="info" columns="2">
+                        <h:outputText value="Identificador espacio: "/>
+                        <h:outputText value="#{espacioClientBean.espacio.id}"/>
+                        <h:outputText value="Nombre: "/>
+                        <h:outputText value="#{espacioClientBean.espacio.nombre}"/>
+                        <h:outputText value="Ciudad: "/>
+                        <h:outputText value="#{espacioClientBean.espacio.ciudad}"/>
+                        <h:outputText value="Dirección: "/>
+                        <h:outputText value="#{espacioClientBean.espacio.direccion}"/>
+                        <h:outputText value="Precio: "/>
+                        <h:outputText value="#{espacioClientBean.espacio.precio}"/>
+                        <h:outputText value=""/>
+                    </p:panelGrid>
+                    <p:commandButton value="Borrar"  action="listaEspacios"
+                                     actionListener="#{espacioClientBean.deleteEspacio()}"/>
+                    <p:commandButton value="Back" action="listaEspacios" icon="ui-icon-arrowrefresh-1-w"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

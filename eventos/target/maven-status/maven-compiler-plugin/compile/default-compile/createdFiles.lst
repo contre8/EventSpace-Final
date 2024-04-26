@@ -1,9 +1,13 @@
 com\mycompany\eventspace\entities\ReservarEspacioPK.class
 com\mycompany\eventspace\rest\EspacioFacadeREST.class
+com\mycompany\eventspace\client\EspacioClientBean.class
+com\mycompany\eventspace\json\EspacioReader$1.class
 com\mycompany\eventspace\rest\ApplicationConfig.class
+com\mycompany\eventspace\json\EspacioWriter.class
 com\mycompany\eventspace\rest\UsersFacadeREST.class
 com\mycompany\eventspace\entities\UserGroups.class
 com\mycompany\eventspace\entities\Users_.class
+com\mycompany\eventspace\espacio\EspacioJava.class
 com\mycompany\eventspace\reserva\Reserva.class
 com\mycompany\eventspace\rest\UserGroupsFacadeREST.class
 com\mycompany\eventspace\entities\ReservarEspacioPK_.class
@@ -11,7 +15,9 @@ com\mycompany\eventspace\rest\AbstractFacade.class
 com\mycompany\eventspace\entities\Espacio.class
 com\mycompany\eventspace\entities\Users.class
 com\mycompany\eventspace\entities\ReservarEspacio_.class
+com\mycompany\eventspace\client\EspacioBackingBean.class
 com\mycompany\eventspace\entities\Espacio_.class
 com\mycompany\eventspace\entities\UserGroups_.class
 com\mycompany\eventspace\entities\ReservarEspacio.class
 com\mycompany\eventspace\rest\ReservarEspacioFacadeREST.class
+com\mycompany\eventspace\json\EspacioReader.class

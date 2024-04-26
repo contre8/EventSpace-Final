@@ -28,7 +28,7 @@
                                 <f:selectItems value="#{reserva.ciudades}" var="r" itemValue="#{r.id}" itemLabel="#{r.nombre}, #{r.id}, #{r.direccion}"/>
                             </h:selectOneRadio>
                             <p:commandButton value="Siguiente" action="detallesFecha" />
-                            <p:commandButton id="back" value="Atrás" action="listaCiudad" icon="ui-icon-arrowrefresh-1-w"/>
+                            <p:commandButton id="back" value="Atrás" action="reserva" icon="ui-icon-arrowrefresh-1-w" immediate="true"/>
                         </h:form>
 
                     </c:otherwise>
