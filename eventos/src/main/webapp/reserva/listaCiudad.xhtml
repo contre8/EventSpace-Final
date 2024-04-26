@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h2>Selecciona un espacio</h2>
+                <c:choose>
+                    <c:when test="#{empty reserva.ciudades}">
+                        <h2>No se han encontrado espacios en esa ciudad</h2>
+                        <h:form>
+                            No se han encontrado espacios en esa ciudad<br/>
+                            Ciudad: #{reserva.ciudad}<br/>
+                            <p:commandButton id="back" value="Atrás" action="reserva" icon="ui-icon-arrowrefresh-1-w"/>
+                        </h:form>
+                    </c:when>
+                    <c:otherwise>
+                        <h:form>
+                            <h:selectOneRadio value="#{reserva.espId}" layout="pageDirection" required="true">
+                                <f:selectItems value="#{reserva.ciudades}" var="r" itemValue="#{r.id}" itemLabel="#{r.nombre}, #{r.id}, #{r.direccion}"/>
+                            </h:selectOneRadio>
+                            <p:commandButton value="Siguiente" action="detallesFecha" />
+                            <p:commandButton id="back" value="Atrás" action="listaCiudad" icon="ui-icon-arrowrefresh-1-w"/>
+                        </h:form>
+
+                    </c:otherwise>
+                </c:choose>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

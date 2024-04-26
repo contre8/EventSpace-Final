@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h2>Introduce Fecha</h2>
+                <h:form>
+                    <p/>ID: #{reserva.espacio.id}<p/>
+                    Nombre: #{reserva.espacio.nombre}<p/>
+                    Ciudad: #{reserva.espacio.ciudad}<p/>                    
+                    Dirección: #{reserva.espacio.direccion}<p/>
+                    Propietario #{reserva.espacio.propietario}<p/>
+                    Precio: #{reserva.espacio.precio}€<p/>
+                    <p:outputLabel for="fecha" value="Fecha de reserva: "/>
+                    <p:datePicker id="fecha" view="date" value="#{reserva.fecha}" locale="es"
+                                  yearNavigator="true" yearRange="1900:2030" pattern="yyyy-MM-dd" />
+                    
+                    <p:message for="fecha"/> 
+                    <p/><p:commandButton value="Confirmar y Pagar" action="card" />
+                    <p:commandButton id="back" value="Atrás" action="listaCiudad" icon="ui-iconarrowrefresh-1-w"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

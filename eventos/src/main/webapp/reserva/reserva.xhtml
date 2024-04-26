@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h2>Reserva de Espacio</h2><p/>
+                <h:form>
+                    <p:messages id="messages" closable="true"/>
+                    <p:panel header="Búsqueda por Ciudad">
+                        <h:panelGrid id="grid" columns="2" cellpadding="10" >
+                            <h:outputLabel for="ciudad" value="Ciudad:" style="font-weight:bold"/>
+                            <p:inputText id="ciudad" value="#{reserva.ciudad}" required="true"
+                                         requiredMessage="Por favor, introduce la ciudad donde se encuentra el espacio."/>
+                        </h:panelGrid>
+                        <p:commandButton id="city" value="Siguiente" action="listaCiudad"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
