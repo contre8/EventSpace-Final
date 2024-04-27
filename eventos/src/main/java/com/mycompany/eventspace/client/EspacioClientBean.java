@@ -6,6 +6,7 @@
 package com.mycompany.eventspace.client;
 
 import com.mycompany.eventspace.entities.Espacio;
+import com.mycompany.eventspace.jaas.LoginView;
 import com.mycompany.eventspace.json.EspacioReader;
 import com.mycompany.eventspace.json.EspacioWriter;
 import java.util.Collections;
@@ -58,11 +59,24 @@ public class EspacioClientBean {
 
     @Inject
     EspacioBackingBean bean;
+    
+    @Inject
+    LoginView bean2;
 
-    public List<Espacio> getEspaciosPropietario3() {
+    public List getEspaciosPropietario3() {
+        try {
+            return em.createQuery("SELECT e FROM Espacio e WHERE e.propietario.email = :email", com.mycompany.eventspace.entities.Espacio.class)
+                    .setParameter("email", bean2.getEmail())
+                    .getResultList();
+        } catch (NoResultException e) {
+            return Collections.emptyList(); // Devuelve una lista vacía si no se encuentran resultados
+        }
+    }
+    
+    public List<Espacio> getEspaciosPropietario() {
         try {
             return em.createQuery("SELECT e FROM Espacio e WHERE e.propietario = :email", Espacio.class)
-                    .setParameter("email", "propietario3@example.com")
+                    .setParameter("email", bean2.getEmail())
                     .getResultList();
         } catch (NoResultException e) {
             return Collections.emptyList(); // Devuelve una lista vacía si no se encuentran resultados

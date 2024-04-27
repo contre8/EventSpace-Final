@@ -25,6 +25,7 @@ public class EspacioBackingBean implements Serializable{
     String horaFin;
     int salones;
     BigDecimal precio;
+    String propietario;
 
     public int getEspId() {
         return espId;
@@ -89,6 +90,15 @@ public class EspacioBackingBean implements Serializable{
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
+
+    public String getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
+    }
+    
     
     
 }

@@ -18,7 +18,7 @@
                         <h:form>
                             <h:selectOneRadio value="#{espacioBackingBean.espId}"
                                               layout="pageDirection">
-                                <c:forEach items="#{espacioJava.espaciosPropietario3}" var="e">
+                                <c:forEach items="#{espacioClientBean.espaciosPropietario3}" var="e">
                                     <f:selectItem itemValue="#{e.id}" itemLabel="#{e.nombre}"/>
                                 </c:forEach>
                             </h:selectOneRadio>

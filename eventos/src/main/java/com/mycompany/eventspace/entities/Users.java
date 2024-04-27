@@ -97,6 +97,19 @@ public class Users implements Serializable {
         this.autorizado = autorizado;
     }
 
+    public Users(String nombre, String apellido, String dni, Date nacimiento, int telefono, String email, String password, String espacio, String domicilio) {
+        this.email = email;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellidos = apellido;
+        this.dni = dni;
+        this.nacimiento = nacimiento;
+        this.telefono = telefono;
+        this.espacio = espacio;
+        this.domicilio = domicilio;
+        
+    }
+
     public String getNombre() {
         return nombre;
     }

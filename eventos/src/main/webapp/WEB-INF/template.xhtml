@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,22 +18,49 @@
     <h:body>
 
         <p:layout fullPage="true">
+
             <p:layoutUnit position="north">
                 <h2 style="text-align: center;"><h:outputText value="EventSpace" style="color: green; font-size: 34px;"/></h2>
+                <h:form>
+                    <p:toolbar rendered="#{request.isUserInRole('clientes')}">
+                        <f:facet name="left">
+                            <p:commandButton type="button" value="New" icon="ui-icon-document"/>
+                            <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+                            <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                            </span>
+                            <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
+                        </f:facet>
+                        <f:facet name="right">
+                            <p:menuButton value="#{loginView.authenticatedUser.nombre}">
+                                <p:menuitem value="Cerrar sesión" action="#{loginView.logout}" icon="ui-iconpower" />
+                            </p:menuButton>
+                        </f:facet>
+                    </p:toolbar>
+                </h:form>
             </p:layoutUnit>
+
             <p:layoutUnit position="west" size="200" header="Menú" collapsible="true">
                 <h:form>
                     <p:menu>
                         <p:menuitem value="Inicio" outcome="/index.xhtml" icon="ui-icon-home" />
-                        <p:menuitem value="Reservar Espacio" action="reserva"/>
-                        <p:menuitem value="Lista Espacios" action="espacios/listaEspacios.xhtml"/>
+                        <p:menuitem value="Iniciar Sesión" outcome="/login.xhtml"
+                                    rendered="#{request.isUserInRole('clientes')==false}" icon="ui-icon-key"/>
+                        <p:menuitem value="Registro" outcome="/registro.xhtml"
+                                    rendered="#{request.isUserInRole('propietarios')==false}" icon="ui-icon-pencil"/>
+                        <p:submenu label ="Cliente" rendered="#{request.isUserInRole('clientes')}">
+                            <p:menuitem value="Reservar Espacio" action="reserva" icon="ui-icon-cart"/>
+                        </p:submenu>
+                        <p:submenu label ="Propietarios" rendered="#{request.isUserInRole('propietarios')}">
+                            <p:menuitem value="Lista Espacios" action="espacios/listaEspacios.xhtml"/>
+                        </p:submenu>
                     </p:menu>
                 </h:form>
             </p:layoutUnit>
-
+            
             <p:layoutUnit position="center">
                 <p:panel id="basic" header="Mostrando #{espacioFacadeREST.countREST()} espacios!" footer="EventSpace" style="margin-bottom:20px">
-                        <ui:insert name="content" />
+                    <ui:insert name="content" />
                 </p:panel>
             </p:layoutUnit>
 

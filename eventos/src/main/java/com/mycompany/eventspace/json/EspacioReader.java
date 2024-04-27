@@ -81,5 +81,5 @@ public class EspacioReader implements MessageBodyReader<Espacio> {
         }
         return espacio;
     }
-    
+
 }
